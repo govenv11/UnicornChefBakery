@@ -1,0 +1,42 @@
+<div class="row">
+                        <div class="col-md-3">
+                            <div class="product-top">
+                                <img src="./images/products/product-3.jpg">
+                                <div class="overlay-right">
+                                    <button type="button" class="btn btn-secondary" title="Quick Shop">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-secondary" title="Add to Wishlist">
+                                        <i class="fa fa-heart-o"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+
+                            <div class="product-bottom text-center">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                                <h3 style="font-family:'Poppins'; font-size: 18px;">Laptop Description</h3>
+
+                                <div class="product-description" data-name=LAPTOP" data-price="17">
+
+                                    <p class="product-price" style="font-size: 18px;">&#82; 17</p>
+                                    <form class="add-to-cart" action="cart.html" method="post">
+                                        <div>
+                                            <label for="qty-2">Quantity</label>
+                                            <input type="text" name="qty-2" id="qty-2" class="qty" value="1" />
+                                        </div>
+                                        <p><input type="submit" value="Add to cart" class="btn" /></p>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
