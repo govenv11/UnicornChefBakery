@@ -1,0 +1,36 @@
+.row div.active {
+    padding: 2px;
+    transition: all 0.5s ease;
+}
+
+.row div.delete {
+    display: none;
+    padding: 0;
+    transition: all 0.5s ease;
+}
+
+.row div.current {
+    background-color: white;
+    color: black;
+}
+
+.filter-menu {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.filter-menu li {
+    display: inline-block;
+    padding: 10px 17px;
+    background-color: #FCB941;
+    color: #fff;
+    cursor: pointer;
+}
+
+.filter-menu li:hover,
+.filter-menu li.current {
+    background-color: white;
+    border: 2px solid #FCB941;
+    color: black;
+}
+
