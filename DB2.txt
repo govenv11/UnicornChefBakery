@@ -1,0 +1,239 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
+from django.db import models
+
+
+class Address(models.Model):
+    addressno = models.AutoField(primary_key=True)
+    streetname = models.CharField(max_length=200)
+    city = models.CharField(max_length=100)
+    code = models.IntegerField(blank=True, null=True)
+    addresstype = models.IntegerField(blank=True, null=True)
+    addresslabel = models.CharField(max_length=50, blank=True, null=True)
+    customerno = models.ForeignKey('Customers', models.DO_NOTHING, db_column='customerno')
+
+    class Meta:
+        managed = False
+        db_table = 'address'
+
+
+class AuthGroup(models.Model):
+    name = models.CharField(unique=True, max_length=150)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group'
+
+
+class AuthGroupPermissions(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group_permissions'
+        unique_together = (('group', 'permission'),)
+
+
+class AuthPermission(models.Model):
+    name = models.CharField(max_length=255)
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    codename = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_permission'
+        unique_together = (('content_type', 'codename'),)
+
+
+class AuthUser(models.Model):
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.IntegerField()
+    username = models.CharField(unique=True, max_length=150)
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
+    email = models.CharField(max_length=254)
+    is_staff = models.IntegerField()
+    is_active = models.IntegerField()
+    date_joined = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user'
+
+
+class AuthUserGroups(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_groups'
+        unique_together = (('user', 'group'),)
+
+
+class AuthUserUserPermissions(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_user_permissions'
+        unique_together = (('user', 'permission'),)
+
+
+class Cards(models.Model):
+    cardno = models.AutoField(primary_key=True)
+    cardnumber = models.CharField(max_length=50)
+    cardholder = models.CharField(max_length=100)
+    expirydate = models.CharField(max_length=10)
+    cvv = models.IntegerField()
+    customerno = models.ForeignKey('Customers', models.DO_NOTHING, db_column='customerno', blank=True, null=True)
+    addressno = models.ForeignKey(Address, models.DO_NOTHING, db_column='addressno', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'cards'
+
+
+class Cart(models.Model):
+    idcart = models.AutoField(primary_key=True)
+    cartqty = models.IntegerField(blank=True, null=True)
+    cartprice = models.FloatField(blank=True, null=True)
+    invoice = models.ForeignKey('Invoices', models.DO_NOTHING, db_column='invoice', blank=True, null=True)
+    cartstate = models.IntegerField(blank=True, null=True)
+    customerno = models.ForeignKey('Customers', models.DO_NOTHING, db_column='customerno', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'cart'
+        db_table_comment = '\t\t\t'
+
+
+class Cartitems(models.Model):
+    idcartitems = models.IntegerField(primary_key=True)
+    cart = models.ForeignKey(Cards, models.DO_NOTHING, db_column='cart', blank=True, null=True)
+    product = models.ForeignKey('Products', models.DO_NOTHING, db_column='product', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'cartitems'
+
+
+class Customers(models.Model):
+    customerno = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+    lastname = models.CharField(max_length=100)
+    cellno = models.CharField(max_length=45)
+    email = models.CharField(max_length=100)
+    login = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='login', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'customers'
+
+
+class Delivery(models.Model):
+    iddelivery = models.IntegerField(primary_key=True)
+    deliverystatus = models.IntegerField(blank=True, null=True)
+    deliverydate = models.DateTimeField(blank=True, null=True)
+    shippingdate = models.DateTimeField(blank=True, null=True)
+    scheduleddate = models.DateTimeField(blank=True, null=True)
+    invoice = models.ForeignKey('Invoices', models.DO_NOTHING, db_column='invoice', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'delivery'
+
+
+class DjangoAdminLog(models.Model):
+    action_time = models.DateTimeField()
+    object_id = models.TextField(blank=True, null=True)
+    object_repr = models.CharField(max_length=200)
+    action_flag = models.PositiveSmallIntegerField()
+    change_message = models.TextField()
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'django_admin_log'
+
+
+class DjangoContentType(models.Model):
+    app_label = models.CharField(max_length=100)
+    model = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'django_content_type'
+        unique_together = (('app_label', 'model'),)
+
+
+class DjangoMigrations(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    app = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    applied = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_migrations'
+
+
+class DjangoSession(models.Model):
+    session_key = models.CharField(primary_key=True, max_length=40)
+    session_data = models.TextField()
+    expire_date = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_session'
+
+
+class Invoices(models.Model):
+    idinvoices = models.AutoField(primary_key=True)
+    invoicesamt = models.FloatField(blank=True, null=True)
+    invoicesqty = models.IntegerField(blank=True, null=True)
+    invoicesdate = models.DateTimeField(blank=True, null=True)
+    invoicestype = models.IntegerField(blank=True, null=True)
+    invoicesfor = models.ForeignKey(Customers, models.DO_NOTHING, db_column='invoicesfor')
+    invoicesby = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='invoicesby', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'invoices'
+        db_table_comment = '\t'
+
+
+class Productcategory(models.Model):
+    idproductcategory = models.IntegerField(primary_key=True)
+    productcategory = models.CharField(max_length=100, blank=True, null=True)
+    productcategorydescr = models.CharField(max_length=400, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'productcategory'
+
+
+class Products(models.Model):
+    idproducts = models.IntegerField(primary_key=True)
+    productscode = models.CharField(max_length=45, blank=True, null=True)
+    productsname = models.CharField(max_length=200, blank=True, null=True)
+    productsdescription = models.CharField(max_length=2000, blank=True, null=True)
+    productsprice = models.FloatField(blank=True, null=True)
+    productscat = models.ForeignKey(Productcategory, models.DO_NOTHING, db_column='productscat')
+    productsimg = models.CharField(max_length=400, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'products'

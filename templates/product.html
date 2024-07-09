@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="icon" href="../static/images/logo/Unicorn Chef logo.jpg">
+    <title>Products - unicornchefbakery</title>
+    <meta charset="utf-8" />
+    <meta name="viewpoint" content="width=device-width,initial-scal=1.0">
+    <meta http-equip="X-UA-compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/style.css" media="screen" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/jquery.store.js"></script>
+</head>
+
+<body>
+
+<!-- NAVIGATION BAR -->
+
+    <section id="nav-bar">
+        <nav class="navbar navbar-expand-lg navbar-light">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="topnav">
+                <a style="color:black;" class="active" href="/"><img src="../static/images/logo/Unicorn Chef logo1.jpg" alt="Index"
+                    width="150" height="150"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        <a style="color: chartreuse;font-size: large;font-style: italic;" class="nav-link" href="/"><li class="xxxlarge"><i class="fa fa-home"></i>Home</li></a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: chartreuse;font-size: large;font-style: italic;" class="nav-link" href="../cart/"><li class="xxxlarge"><i class="fa fa-shopping-cart"></i>Cart</li></a>
+
+                    </li>
+
+                    <li class="nav-item">
+                        <a style="color: chartreuse;font-size: large;font-style: italic;" class="nav-link" href="../about/">About Us</a>
+                    </li>
+
+                    <!-- <li class="nav-item">
+                        <a style="color:black;" class="nav-link" href="#services">Our Services</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a style="color:black;" class="nav-link" href="#team" tabindex="-1" aria-disabled="true">Our
+                            Team</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a style="color: chartreuse;font-size: large;font-style: italic;"  class="nav-link" href="../contact/">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: chartreuse;font-size: large;font-style: italic;" class="nav-link" href="../login/">Login</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+<!-- SLIDER -->
+
+<!-- NEW ARIVALS FILTER -->
+
+
+        <section class="new-arrivals">
+            <div id="site">
+                <div class="container">
+                
+                    <ul class="filter-menu">
+                        <li data-target="Reset" style="background-color: chartreuse;">Reset</li>
+                        <li data-target="Cakes" style="background-color: chartreuse;">Cakes</li>
+                        <li data-target="Cupcakes" style="background-color: chartreuse;">Cupcakes</li>
+                        <li data-target="Cookies" style="background-color: chartreuse;">Cookies</li>
+                        <li data-target="Doughnuts" style="background-color: chartreuse;">Doughnuts</li>
+                    </ul>
+                 <div id='content'>
+                    <div class="row">
+                    {% for product in products %}
+                <div class="product col-md-3" data-item="{{product.productscat.productcategory}}">
+                       <div class="product-top">
+                          <img src='../static/images{{product.productsimg}}'>
+                         <div class='+'"'+'overlay-right'+'"'+'>
+                                 <button type="button" class="btn btn-secondary" title="Quick Shop">
+                                     <i style="color: chartreuse;" class="fa fa-eye"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-secondary" title="Add to Wishlist">
+                                     <i style="color: chartreuse;" class="fa fa-heart-o"></i>
+                                    </button>
+
+                                    <!-- <button type="button" class="btn btn-secondary" title="Add to Cart">
+                                        <i class="fa fa-shopping-cart"></i>
+                                         </button> -->
+                                         </div>
+                                        </div>
+
+                                        <div class="product-bottom text-center">
+                                            <i style="color: gold;" class="fa fa-star"></i>
+                                            <i style="color: gold;"class="fa fa-star"></i>
+                                            <i style="color: gold;"class="fa fa-star"></i>
+                                            <i style="color: gold;"class="fa fa-star"></i>
+                                            <i style="color: gold;" class="fa fa-star-half-o"></i>
+                                             <h3 style="font-family:sans-serif; font-size: 20px;">{{product.productsdescription}}</h3>
+                                            <div class="product-description" data-name={{product.productsname}} data-price= {{product.productsprice}} data-prodid={{product.idproducts}}>
+
+                                                <p class="product-price" style="font-size: 20px;font-family: sans-serif;">R {{product.productsprice}}</p>
+                                                <form class=add-to-cart action="../cart/" method="post">
+                                                     <div>
+                                                          <label for="qty-2">Quantity</label>
+                                                                  <input type="text" name="qty-2" id="qty-2" class="qty" value="1" />
+                                                                                  </div>
+                                                                                      <p><input type="submit" value="Add to cart" class="btn" /></p>
+                                                        </form>
+
+                                                         </div>
+                                                           </div>
+                                                        </div>
+
+                                                        {% if forloop.counter|divisibleby:4 %} 
+
+                                                        
+                                   </div>
+                                   <div class="row">
+                   
+                                   {% endif %}
+                        {% endfor %}
+
+
+                 </div>   
+                    
+                </div>
+            </div>
+        </section>
+
+<!-- FOOTER-->
+<section id="team">
+
+    <section id="footer" style="margin-top: 40px; background-color: rgb(252, 250, 250); padding-top: 30px;background-color: whitesmoke;">
+        <footer class="container">
+            <div class="footer-middle">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-s6 col-lg-3">
+                            <div class="widget widget-about">
+                                <img src="../static/images/logo/Unicorn Chef logo.jpg" class="footer-logo" alt="Footer Logo"
+                                    width="50" height="50">
+                                <p style="background-color: lightgreen;">“Our mission is to bake gourmet goodies that inspire joy, foster community, and enrich the life of every customer with warmth and sweetness.”. </p>
+
+                                <div class="widget-call">
+                                    <i class="icon-phone"></i>
+                                    Got Question? Call us during Office hrs Monday-Saturday
+                                    <a href="tel:#" style="color: darkgreen;">+275006854</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
+
+<ul class="widget-list">
+<li><a href="/about/" style="color:darkgreen;">About Company</a></li>
+<li><a href="/products/" style="color: darkgreen;">Our Services</a></li>
+<li><a href="#how to shop" style="color: darkgreen;">How to shop</a></li>
+<li><a href="/faq/" style="color: darkgreen;">FAQ</a></li>
+<li><a href="/contact/" style="color:darkgreen;">Contact us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4>Customer Service</h4>
+
+<ul class="widget-list">
+<li><a href="/cart/" style="color:darkgreen;">Payment Methods</a></li>
+<li><a href="/termsandconditions/" style="color: darkgreen;">Terms and conditions</a></li>
+<li><a href="/privacypolicy/" style="color: darkgreen;">Privacy Policy</a></li>
+</ul>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
+
+<ul class="widget-list">
+<li><a href="/login/" style="color:darkgreen;">Sign In</a></li>
+<li><a href="/cart/" style="color: darkgreen;">View Cart</a></li>
+<li><a href="/wishlist/" style="color: darkgreen;">My Wishlist</a></li>
+<li><a href="/order/" style="color: darkgreen;">Track My Order</a></li>
+<li><a href="/faq/" style="color: darkgreen;">Help</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="container">
+                    <p style="text-align:center;">Copyright © 2024 Unicorn Chef Bakery. All Rights Reserved.</p>
+                    <figure style="float: right;">
+                        <img src="../static/images/products/payments.png" alt="Payment methods" width="272" height="20">
+                    </figure>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+        <script type="text/javascript" src="../static/filter.js"></script>
+
+</body>
+
+</html>
